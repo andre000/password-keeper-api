@@ -1,0 +1,24 @@
+{
+  "name": "password-keeper-api",
+  "version": "0.0.1",
+  "description": "API for password-keeper",
+  "main": "bin/www/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon bin/www/index.js"
+  },
+  "author": "André L. Adriano",
+  "license": "MIT",
+  "dependencies": {
+    "debug": "^4.1.1",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "sequelize": "^4.43.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"
+  }
+}
