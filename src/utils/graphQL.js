@@ -6,15 +6,25 @@ const { makeExecutableSchema } = require('graphql-tools');
 
 const { schema: userSchema, resolver: userResolver } = require('../components/User');
 const { schema: passwordSchema, resolver: passwordResolver } = require('../components/Password');
+const { schema: folderSchema, resolver: folderResolver } = require('../components/Folder');
 
 const resolvers = {
-  ...userResolver,
-  ...passwordResolver,
+  Query: {
+    ...passwordResolver.Query,
+    ...userResolver.Query,
+    ...folderResolver.Query,
+  },
+  Mutation: {
+    ...passwordResolver.Mutation,
+    ...userResolver.Mutation,
+    ...folderResolver.Mutation,
+  },
 };
 
 const typeDefs = mergeTypes([
-  userSchema,
   passwordSchema,
+  userSchema,
+  folderSchema,
 ], { all: true });
 
 const schema = makeExecutableSchema({
