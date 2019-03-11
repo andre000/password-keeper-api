@@ -33,7 +33,7 @@ const schema = makeExecutableSchema({
 });
 
 module.exports = (app) => {
-  app.use('/gql',
+  app.use(process.env.GQL_ENDPOINT,
     cors(),
     bodyParser.json(),
     graphqlHTTP({

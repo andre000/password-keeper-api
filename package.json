@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon bin/www/index.js",
-    "generate": "node bin/utils/generateKey.js"
+    "generate": "node bin/utils/generateKey.js",
+    "start": "NODE_ENV=production node bin/www/index.js"
   },
   "author": "André L. Adriano",
   "license": "MIT",
