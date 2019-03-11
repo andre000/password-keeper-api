@@ -1,6 +1,6 @@
 const fs = require('fs');
 const chalk = require('chalk');
-const { Entropy, charset64 } = require('entropy-string');
+const { Entropy, charset16 } = require('entropy-string');
 
 const { log } = console;
 log(chalk`{whiteBright.bold RANDOM KEY GENERATOR}`);
@@ -10,8 +10,8 @@ log(chalk`{gray - Reading .env file...}`);
 const env = String(fs.readFileSync('.env'));
 
 log(chalk`{gray - Creating new Key...}`);
-const entropy = new Entropy({ charset: charset64 });
-const key = entropy.token();
+const entropy = new Entropy({ charset: charset16 });
+const key = entropy.token().substr(0, 32);
 
 const newEnv = env.replace(/SECRET_KEY=.+/, `SECRET_KEY=${key}`);
 log(chalk`{gray - Saving new .env file...}`);
