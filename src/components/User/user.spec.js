@@ -28,10 +28,21 @@ describe('User Resolver', () => {
     expect(user.name).toBe(mockUser.name);
   });
 
+  test('should be able to retrieve multiple users', async () => {
+    const users = await Query.users();
+    expect(Array.isArray(users)).toBe(true);
+  });
+
   test('should be able to validate the user password', async () => {
     const isValid = await Query
       .validateUserPassword(null, { password: mockUser.password, email: mockUser.email });
     expect(isValid).toBe(true);
+  });
+
+  test('should throw an error when validating an non existent user', async () => {
+    expect(Query
+      .validateUserPassword(null, { password: mockUser.password, email: 'this@doesntexist.com' }))
+      .rejects.toThrow('User not found');
   });
 
   test('should be able to edit an user', async () => {
@@ -44,9 +55,9 @@ describe('User Resolver', () => {
   });
 
   test('should be able to delete an user', async () => {
-    const { _id } = await Query.user({ email: mockUser.email });
+    const { _id } = await Query.user({ email: 'test2@test.com' });
     await Mutation.deleteUser(_id);
-    const user = await await Query.user({ email: mockUser.email });
+    const user = await await Query.user({ email: 'test2@test.com' });
 
     expect(!!user).toEqual(false);
   });

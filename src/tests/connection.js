@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 module.exports = {
   db: null,
   async connect() {
+    mongoose.set('useFindAndModify', false);
     await mongoose.connect(global.__MONGO_URI__, {
       useCreateIndex: true,
       useNewUrlParser: true,
