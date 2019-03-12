@@ -8,8 +8,8 @@
     "dev": "nodemon bin/www/index.js",
     "generate": "node bin/utils/generateKey.js",
     "start": "NODE_ENV=production node bin/www/index.js",
-    "lint": "eslint",
-    "fix": "eslint fix"
+    "lint": "eslint .",
+    "fix": "eslint . --fix"
   },
   "author": "André L. Adriano",
   "license": "MIT",
