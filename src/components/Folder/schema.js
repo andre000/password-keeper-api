@@ -12,7 +12,7 @@ module.exports = `
   }
 
   type Mutation {
-    addFolder(title: String!, color: String, passwords: [String]!): Folder
+    addFolder(title: String!, color: String, passwords: [String]): Folder
     editFolder(_id: String!, title: String, color: String, passwords: [String]): Folder
     deleteFolder(_id: String!, title: String!, color: String, passwords: [String]): Folder
   }

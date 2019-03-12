@@ -5,7 +5,7 @@ const { model: Users } = require('../components/User');
 const logger = require('./logger');
 
 const CACHE_MINUTES = 30;
-const TOKEN_MINUTES = 5;
+const TOKEN_MINUTES = process.env.NODE_ENV === 'production' ? 5 : 99;
 const WHITELISTED_PATHS = [
   '/',
   '/login',
@@ -42,7 +42,7 @@ const generateToken = async (req, res) => {
 };
 
 const verifyToken = async (req, res, next) => {
-  if (WHITELISTED_PATHS.includes(req.path)) {
+  if (WHITELISTED_PATHS.includes(req.path) || process.env.NODE_ENV === 'test') {
     return next();
   }
   const token = req.headers['x-access-token'];
