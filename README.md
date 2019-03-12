@@ -7,6 +7,7 @@ It uses:
   - Node.js
   - GraphQL
   - MongoDB
+  - JWT
 
 For the crytpograph on the protected fields, it uses the crypto package from Node.js with AES-256-CBC algorithm.
 
@@ -18,3 +19,12 @@ Then you must install the project with `npm install` and generate an key for you
 To start the API run `npm start` if you wish to use it on production mode, or `npm run dev` for development mode.
 
 GraphQL default endpoint: `/gpl`
+
+### First User
+
+In order to create your first user, you must make a POST request to `/start` with a JSON having the fields: `name, email, password`.
+This method is only avaiable when there is no user created. In order to create new ones, use the GraphQL endpoint.
+
+### Authentication 
+
+To generate the JWT token, make a POST request to `/login` with a JSON having the fields: `email, password`.
