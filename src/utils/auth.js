@@ -9,6 +9,7 @@ const TOKEN_MINUTES = 5;
 const WHITELISTED_PATHS = [
   '/',
   '/login',
+  '/start',
 ];
 
 const findUser = id => Users.findById(id);
