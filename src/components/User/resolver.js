@@ -18,7 +18,10 @@ module.exports = {
       const newUser = new User(args);
       return newUser.save();
     },
-    editUser: (root, { _id, ...args }) => User.findOneAndUpdate(_id, { $set: args }),
+    editUser: async (root, { _id, ...args }) => {
+      await User.findOneAndUpdate(_id, { $set: args });
+      return User.findById(_id);
+    },
 
     deleteUser: (root, args) => User.findOneAndRemove(args),
   },
