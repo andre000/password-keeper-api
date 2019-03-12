@@ -65,7 +65,7 @@ const verifyToken = async (req, res, next) => {
       return res.send(403).send({ auth: false, error: 'User is inactive. Please contact the system administrator' });
     }
 
-    next();
+    return next();
   } catch (err) {
     logger.error(err);
     return res.status(403).send({ auth: false, error: 'Failed to authenticate token' });
