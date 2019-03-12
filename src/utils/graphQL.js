@@ -1,5 +1,4 @@
 const graphqlHTTP = require('express-graphql');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const { mergeTypes } = require('merge-graphql-schemas');
 const { makeExecutableSchema } = require('graphql-tools');
@@ -35,7 +34,6 @@ const schema = makeExecutableSchema({
 module.exports = (app) => {
   app.use(process.env.GQL_ENDPOINT,
     cors(),
-    bodyParser.json(),
     graphqlHTTP({
       schema,
       graphiql: process.env.NODE_ENV !== 'production',

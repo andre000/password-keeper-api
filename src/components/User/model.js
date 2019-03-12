@@ -43,8 +43,12 @@ userSchema.pre('updateOne', async function (next) {
 });
 
 userSchema.methods.validatePassword = async function (password) {
-  const valid = await compare(password, this.password);
-  return valid;
+  try {
+    const valid = await compare(password, this.password);
+    return valid;
+  } catch (err) {
+    return false;
+  }
 };
 
 module.exports = model('User', userSchema, 'users');

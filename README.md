@@ -11,7 +11,7 @@ It uses:
 For the crytpograph on the protected fields, it uses the crypto package from Node.js with AES-256-CBC algorithm.
 
 ### Usage
-You must fill the all the fields (except `SECRET_KET`) on the `.env.example` file and rename it to `.env`.
+You must fill the all the fields (except `SECRET_KET` and `SECRET_JWT`) on the `.env.example` file and rename it to `.env`.
 
 Then you must install the project with `npm install` and generate an key for your application with `npm run generate`. If you already have a key you can skip this step and paste your key on the `env` file.
 
