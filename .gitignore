@@ -430,3 +430,4 @@ healthchecksdb
 # End of https://www.gitignore.io/api/node,visualstudio
 
 vault/
+src/tests/globalConfig.json

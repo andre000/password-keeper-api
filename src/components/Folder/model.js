@@ -1,5 +1,6 @@
 /* eslint-disable func-names */
 /* eslint-disable no-underscore-dangle */
+require('../Password/model');
 const { Schema, model } = require('mongoose');
 
 const FolderSchema = new Schema({

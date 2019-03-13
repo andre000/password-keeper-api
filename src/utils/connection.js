@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const logger = require('./logger');
 
+mongoose.set('useFindAndModify', false);
 mongoose.connect(process.env.DB_URI, {
   useCreateIndex: true,
   useNewUrlParser: true,

@@ -14,7 +14,10 @@ module.exports = {
       const newPassword = new Password(args);
       return newPassword.save();
     },
-    editPassword: (root, { _id, ...args }) => Password.findOneAndUpdate(_id, { $set: args }),
+    editPassword: async (root, { _id, ...args }) => {
+      await Password.findOneAndUpdate(_id, { $set: args });
+      return Password.findById(_id);
+    },
 
     deletePassword: (root, args) => Password.findOneAndRemove(args),
   },

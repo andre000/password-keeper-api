@@ -26,6 +26,7 @@ const userSchema = new Schema({
   },
 });
 
+/* istanbul ignore next */
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   const salt = await genSalt();
@@ -34,6 +35,7 @@ userSchema.pre('save', async function (next) {
   return this.password;
 });
 
+/* istanbul ignore next */
 userSchema.pre('updateOne', async function (next) {
   if (!this._update.password) return next();
   const salt = await genSalt();
@@ -42,6 +44,7 @@ userSchema.pre('updateOne', async function (next) {
   return this._update.password;
 });
 
+/* istanbul ignore next */
 userSchema.methods.validatePassword = async function (password) {
   try {
     const valid = await compare(password, this.password);

@@ -37,7 +37,7 @@ module.exports = (app) => {
     graphqlHTTP({
       schema,
       graphiql: process.env.NODE_ENV !== 'production',
-      formatError: (e) => {
+      formatError: (e) => /* istanbul ignore next */ {
         if (e.code) {
           const statusCode = e.code || '500';
           const { message } = e;
