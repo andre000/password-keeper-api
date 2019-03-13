@@ -5,6 +5,7 @@ const { model: Users } = require('../components/User');
 const logger = require('./logger');
 
 const CACHE_MINUTES = 30;
+/* istanbul ignore next */
 const TOKEN_MINUTES = process.env.NODE_ENV === 'production' ? 5 : 99;
 const WHITELISTED_PATHS = [
   '/',
@@ -16,7 +17,7 @@ const findUser = id => Users.findById(id);
 const cachedFindUser = memoize(findUser, { maxAge: 60 * 1000 * CACHE_MINUTES });
 
 const generateToken = async (req, res) => {
-  if (!req.body) {
+  if (!req.body.email) {
     return res.status(403).send({ auth: false, error: 'Empty request' });
   }
 
@@ -34,6 +35,7 @@ const generateToken = async (req, res) => {
     return res.status(200).send({ auth: true, token });
   }
 
+  /* istanbul ignore next */
   const error = !user.active ? 'User is inactive. Please contact the system administrator.'
     : 'Login credential not found. Try again.';
 
@@ -56,18 +58,20 @@ const verifyToken = async (req, res, next) => {
     const { id } = await verify(token, process.env.SECRET_JWT);
     const user = await cachedFindUser(id);
 
+    /* istanbul ignore next */
     if (!user) {
       logger.error(`User not found: ${id}`);
       return res.send(403).send({ auth: false, error: 'User not found' });
     }
 
+    /* istanbul ignore next */
     if (!user.active) {
       logger.error(`User Inactive: ${id}`);
       return res.send(403).send({ auth: false, error: 'User is inactive. Please contact the system administrator' });
     }
 
     return next();
-  } catch (err) {
+  } catch (err) /* istanbul ignore next */ {
     logger.error(err);
     return res.status(403).send({ auth: false, error: 'Failed to authenticate token' });
   }

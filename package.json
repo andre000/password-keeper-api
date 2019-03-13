@@ -40,7 +40,8 @@
     "jest": "^24.4.0",
     "jest-cli": "^24.4.0",
     "jest-environment-node": "^24.4.0",
-    "mongodb-memory-server": "^4.0.2"
+    "mongodb-memory-server": "^4.0.2",
+    "supertest": "^4.0.0"
   },
   "husky": {
     "hooks": {
