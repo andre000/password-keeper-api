@@ -4,7 +4,7 @@
   "description": "API for password-keeper",
   "main": "bin/www/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --coverage",
     "dev": "nodemon bin/www/index.js",
     "generate": "node bin/utils/generateKey.js",
     "start": "NODE_ENV=production node bin/www/index.js",
@@ -46,7 +46,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run fix -- --cache",
-      "pre-push": "npm run lint"
+      "pre-push": "npm run lint && npx jest"
     }
   }
 }
