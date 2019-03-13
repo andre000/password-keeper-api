@@ -8,6 +8,7 @@ It uses:
   - GraphQL
   - MongoDB
   - JWT
+  - Jest
 
 For the crytpograph on the protected fields, it uses the crypto package from Node.js with AES-256-CBC algorithm.
 
