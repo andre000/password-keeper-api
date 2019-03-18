@@ -11,6 +11,10 @@ const passwordSchema = new Schema({
   icon: {
     type: String,
   },
+  username: {
+    type: String,
+    required: true,
+  },
   fields: {
     type: [Field],
     required: true,

@@ -17,6 +17,7 @@ afterAll(async () => {
 const mockPassword = {
   title: 'Test Field',
   icon: 'fa-test',
+  username: 'test',
   fields: [
     {
       title: 'Field1',
