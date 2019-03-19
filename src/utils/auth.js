@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const memoize = require('promise-memoize');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -33,7 +34,7 @@ const generateToken = async (req, res) => {
     const token = sign({ id: user.id }, process.env.SECRET_JWT, {
       expiresIn: 60 * TOKEN_MINUTES,
     });
-    return res.status(200).send({ auth: true, token });
+    return res.status(200).send({ auth: true, token, user: user._id });
   }
 
   /* istanbul ignore next */
