@@ -117,7 +117,7 @@ describe('Authentication Utility', () => {
     test('should successfully retrive data when authenticated', async () => {
       const { status, body } = await request(app)
         .post('/gql')
-        .set('x-access-token', token)
+        .set('authorization', token)
         .send({ query: '{ users { _id } }' });
 
       expect(status).toBe(200);
