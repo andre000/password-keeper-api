@@ -1,6 +1,7 @@
 /* eslint-disable func-names */
 /* eslint-disable no-underscore-dangle */
 const { Schema, model } = require('mongoose');
+const { encrypt } = require('../../utils/cypher');
 const Field = require('./Field');
 
 const passwordSchema = new Schema({
@@ -19,6 +20,16 @@ const passwordSchema = new Schema({
     type: [Field],
     required: true,
   },
+});
+
+passwordSchema.pre('findOneAndUpdate', async function (next) {
+  if (!this._update.$set.fields) return next();
+  this._update.$set.fields.map((f) => {
+    // eslint-disable-next-line no-param-reassign
+    f.value = encrypt(f.value);
+    return f;
+  });
+  return this._update;
 });
 
 module.exports = model('Password', passwordSchema, 'password');
