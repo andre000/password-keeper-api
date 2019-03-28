@@ -26,7 +26,7 @@ module.exports = `
 
   type Mutation {
     addPassword(title: String!, icon: String, username: String, fields: [FieldInput]!): Password
-    editPassword(_id: String!, title: String!, username: String, icon: String, fields: [FieldInput]): Password
-    deletePassword(_id: String!, title: String!, username: String, icon: String, fields: [FieldInput]): Password
+    editPassword(_id: String!, title: String, username: String, icon: String, fields: [FieldInput]): Password
+    deletePassword(_id: String!, title: String, username: String, icon: String, fields: [FieldInput]): Password
   }
 `;
