@@ -15,7 +15,7 @@ module.exports = {
       return newPassword.save();
     },
     editPassword: async (root, { _id, ...args }) => {
-      await Password.findOneAndUpdate(_id, { $set: args });
+      await Password.findOneAndUpdate({ _id }, { $set: args });
       return Password.findById(_id);
     },
 

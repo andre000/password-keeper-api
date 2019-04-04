@@ -13,7 +13,7 @@ module.exports = {
       return Folder.populate(newFolder, 'passwords');
     },
     editFolder: async (root, { _id, ...args }) => {
-      await Folder.findOneAndUpdate(_id, { $set: args }, { runValidators: true });
+      await Folder.findOneAndUpdate({ _id }, { $set: args }, { runValidators: true });
       return Folder.findOne(args).populate('passwords');
     },
     deleteFolder: (root, args) => Folder.findOneAndRemove(args).populate(),

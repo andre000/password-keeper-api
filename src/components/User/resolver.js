@@ -19,7 +19,7 @@ module.exports = {
       return newUser.save();
     },
     editUser: async (root, { _id, ...args }) => {
-      await User.findOneAndUpdate(_id, { $set: args });
+      await User.findOneAndUpdate({ _id }, { $set: args });
       return User.findById(_id);
     },
 
