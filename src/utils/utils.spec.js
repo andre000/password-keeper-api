@@ -71,7 +71,7 @@ describe('Authentication Utility', () => {
       }
     });
 
-    test('should return a token when user successfully logged in', async () => {
+    test('should return a token with user ID when user successfully logged in', async () => {
       const { status, body } = await request(app).post('/login').send({
         email: mockUser.email,
         password: mockUser.password,
@@ -80,6 +80,7 @@ describe('Authentication Utility', () => {
       expect(status).toBe(200);
       expect(body.auth).toEqual(true);
       expect(body.token.length).toBeGreaterThanOrEqual(50);
+      expect(!!body.user).toBe(true);
     });
   });
 
@@ -117,7 +118,7 @@ describe('Authentication Utility', () => {
     test('should successfully retrive data when authenticated', async () => {
       const { status, body } = await request(app)
         .post('/gql')
-        .set('x-access-token', token)
+        .set('authorization', token)
         .send({ query: '{ users { _id } }' });
 
       expect(status).toBe(200);

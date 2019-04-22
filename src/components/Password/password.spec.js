@@ -17,6 +17,7 @@ afterAll(async () => {
 const mockPassword = {
   title: 'Test Field',
   icon: 'fa-test',
+  username: 'test',
   fields: [
     {
       title: 'Field1',
@@ -27,6 +28,7 @@ const mockPassword = {
       value: 'password321',
     },
   ],
+  notes: 'Test note',
 };
 
 describe('Password Resolver', () => {

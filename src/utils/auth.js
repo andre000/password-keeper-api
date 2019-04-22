@@ -1,5 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 const memoize = require('promise-memoize');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const { sign, verify } = require('jsonwebtoken');
 const { model: Users } = require('../components/User');
 const logger = require('./logger');
@@ -32,7 +34,7 @@ const generateToken = async (req, res) => {
     const token = sign({ id: user.id }, process.env.SECRET_JWT, {
       expiresIn: 60 * TOKEN_MINUTES,
     });
-    return res.status(200).send({ auth: true, token });
+    return res.status(200).send({ auth: true, token, user: user._id });
   }
 
   /* istanbul ignore next */
@@ -47,7 +49,7 @@ const verifyToken = async (req, res, next) => {
   if (WHITELISTED_PATHS.includes(req.path) || process.env.NODE_ENV === 'test') {
     return next();
   }
-  const token = req.headers['x-access-token'];
+  const token = req.headers.authorization;
 
   if (!token) {
     logger.error(`No token provided! Header: ${JSON.stringify(req.headers)}`);
@@ -78,6 +80,7 @@ const verifyToken = async (req, res, next) => {
 };
 
 module.exports = (app) => {
+  app.use(cors());
   app.use(bodyParser.json());
   app.post('/login', generateToken);
   app.post('/logout', (req, res) => res.status(200).send({ auth: false, token: null }));
