@@ -28,7 +28,7 @@ const generateToken = async (req, res) => {
     return res.status(403).send({ auth: false, error: 'Login credential not found. Try again' });
   }
 
-  const isValid = user.validatePassword(req.body.password) && user.active;
+  const isValid = await user.validatePassword(req.body.password) && user.active;
 
   if (isValid) {
     const token = sign({ id: user.id }, process.env.SECRET_JWT, {

@@ -72,6 +72,7 @@ describe('Authentication Utility', () => {
     });
 
     test('should return a token with user ID when user successfully logged in', async () => {
+      await User.findOneAndUpdate({ email: mockUser.email, $set: { active: true } });
       const { status, body } = await request(app).post('/login').send({
         email: mockUser.email,
         password: mockUser.password,
@@ -106,13 +107,9 @@ describe('Authentication Utility', () => {
     });
 
     test('should return an erron when trying to use the API unauthenticated', async () => {
-      try {
-        await request(app).post('/gql').send({ query: '{ users { _id } }' });
-        throw new Error();
-      } catch ({ status, response }) {
-        expect(status).toBe(401);
-        expect(response.body).toEqual({ auth: false, error: 'Error. No token provided!' });
-      }
+      const { status, body } = await request(app).post('/gql').send({ query: '{ users { _id } }' });
+      expect(status).toBe(401);
+      expect(body).toEqual({ auth: false, error: 'Error. No token provided!' });
     });
 
     test('should successfully retrive data when authenticated', async () => {
