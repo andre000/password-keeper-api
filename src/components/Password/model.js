@@ -20,9 +20,12 @@ const passwordSchema = new Schema({
     type: [Field],
     required: true,
   },
+  notes: {
+    type: String,
+  },
 });
 
-passwordSchema.pre('findOneAndUpdate', async function (next) {
+passwordSchema.pre('findOneAndUpdate', async function (next) /* istanbul ignore next */ {
   if (!this._update.$set.fields) return next();
   this._update.$set.fields.map((f) => {
     // eslint-disable-next-line no-param-reassign

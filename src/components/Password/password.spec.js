@@ -28,6 +28,7 @@ const mockPassword = {
       value: 'password321',
     },
   ],
+  notes: 'Test note',
 };
 
 describe('Password Resolver', () => {
