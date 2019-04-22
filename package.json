@@ -1,6 +1,6 @@
 {
   "name": "password-keeper-api",
-  "version": "1.4.0",
+  "version": "1.4.3",
   "description": "API for password-keeper",
   "main": "bin/www/index.js",
   "scripts": {
