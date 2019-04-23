@@ -2,10 +2,18 @@ const graphqlHTTP = require('express-graphql');
 const cors = require('cors');
 const { mergeTypes } = require('merge-graphql-schemas');
 const { makeExecutableSchema } = require('graphql-tools');
+const { GraphQLScalarType } = require('graphql');
 
 const { schema: userSchema, resolver: userResolver } = require('../components/User');
 const { schema: passwordSchema, resolver: passwordResolver } = require('../components/Password');
 const { schema: folderSchema, resolver: folderResolver } = require('../components/Folder');
+
+const RawType = new GraphQLScalarType({
+  name: 'Raw',
+  serialize(value) /* istanbul ignore next */ {
+    return value;
+  },
+});
 
 const resolvers = {
   Query: {
@@ -18,6 +26,7 @@ const resolvers = {
     ...userResolver.Mutation,
     ...folderResolver.Mutation,
   },
+  RawType,
 };
 
 const typeDefs = mergeTypes([

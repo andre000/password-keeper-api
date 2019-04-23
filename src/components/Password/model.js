@@ -21,7 +21,7 @@ const passwordSchema = new Schema({
     required: true,
   },
   notes: {
-    type: String,
+    type: Object,
   },
 });
 
